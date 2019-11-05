@@ -71,7 +71,7 @@ void displayString(uint8_t y, uint8_t x, const char *s, uint8_t attr){
         value = (c - 'a' + 37);
       else
         value = (0x00);
-    }
+    //}
     
     addrH = ca >> 8; 
     writeAddrData(DMM, 0x40); 
