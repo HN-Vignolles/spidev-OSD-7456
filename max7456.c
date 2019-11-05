@@ -83,7 +83,7 @@ void displayString(uint8_t y, uint8_t x, const char *s, uint8_t attr){
     writeAddrData(DMAL, ca); 
     writeAddrData(DMDI, value);
     c = *s++;
-    k = k+1;
+    ca = ca+1;
   }
   writeAddrData(VM0, 0x48); 
 }
