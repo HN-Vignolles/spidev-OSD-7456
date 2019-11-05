@@ -27,7 +27,7 @@ int main(int argc, char **argv){
   initspi.bits = 8;
   initspi.speed = 5000000;
   spidev_init();
-  writeAddrData(0x23,0xef);
+  displayChar(1,1,0xFC,OSD_LBC);
   close(fd);
 }
 
