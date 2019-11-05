@@ -54,7 +54,7 @@ void displayString(uint8_t y, uint8_t x, const char *s, uint8_t attr){
   ca = y * 30 + x; 
   writeAddrData(OSDBL,0x00);
   while (c != 0){
-    flag = 0;
+    /*flag = 0;
     int i = 0;
     for(i = 0;i < 34;i++){
       if (c == tAsciiAddr[i].ascii){
@@ -63,7 +63,7 @@ void displayString(uint8_t y, uint8_t x, const char *s, uint8_t attr){
       }
     }
     if(flag == 0){
-      if ((c >= '0') && (c <='9'))
+      */if ((c >= '0') && (c <='9'))
         value = ((c == '0')? 10 : c - '1' + 1);
       else if ((c >= 'A') && (c <= 'Z'))
         value = (c - 'A' + 11);
