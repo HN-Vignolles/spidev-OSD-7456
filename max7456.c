@@ -23,9 +23,9 @@ void writeData(uint8_t data){
   }
 }
 
-void displayChar(uint8_t y, uint8_t x, uint16_t addr){ 
+void displayChar(uint8_t y, uint8_t x, uint16_t addr, uint8_t attr){ 
   uint16_t ca; //character address
-  uint8_t addrH, attr; 
+  uint8_t addrH; 
 
   ca = y * 30 + x; //30 characters per row
   addrH = ca >> 8; 
