@@ -28,6 +28,7 @@ int main(int argc, char **argv){
   initspi.speed = 5000000;
   spidev_init();
   displayChar(1,1,0xFC,OSD_LBC);
+  displayString(2, 2, "Hello", OSD_LBC);
   close(fd);
 }
 
