@@ -72,4 +72,12 @@
 #define DMDO 0x30 // Display Memory Data Out 
 #define CMDO 0x40 // Character Memory Data Out
 
+extern struct spi_ioc_transfer xfer;
+extern int fd;
+
+void writeAddrData(uint8_t addr, uint8_t data);
+void writeData(uint8_t data);
+void displayChar(uint8_t y, uint8_t x, uint16_t addr);
+void clearOSD(void);
+
 #endif
