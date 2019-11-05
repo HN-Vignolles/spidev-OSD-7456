@@ -1,25 +1,9 @@
-#include <stdint.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <getopt.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <linux/types.h>
-#include <linux/spi/spidev.h>
-#define PATH_MAX 4096
+#include "main.h"
+#include "max7456.h"
 
 struct spi_ioc_transfer xfer;
-typedef struct{
-  char filename[PATH_MAX];
-  uint8_t mode, bits;
-  uint32_t speed;
-}spi_t;
 int fd;
 spi_t initspi;
-
-int spidev_init(void);
-void writeAddrData(uint8_t addr, uint8_t data);
 
 int main(int argc, char **argv){
   int c;
@@ -82,15 +66,4 @@ int spidev_init(void){
   xfer.speed_hz = initspi.speed;
   xfer.bits_per_word = initspi.bits;
   return 0;
-}
-
-void writeAddrData(uint8_t addr, uint8_t data){
-  uint8_t buf[2];
-  buf[0] = addr;
-  buf[1] = data;
-  xfer.tx_buf = (unsigned long)buf;
-  xfer.len = 2;
-  if((ioctl(fd, SPI_IOC_MESSAGE(1), &xfer)) < 0){
-    perror("SPI_IOC_MESSAGE");
-  }
 }
