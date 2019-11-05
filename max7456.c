@@ -1,5 +1,5 @@
-#include main.h
-#include max7456.h
+#include "main.h"
+#include "max7456.h"
 
 extern struct spi_ioc_transfer xfer
 
