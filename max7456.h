@@ -28,7 +28,18 @@
         10 = BT : (3 x BT)
         11 = (3 x BT) : BT */
 #define HOS 0x02 // Horizontal Offset 
+ /*5-0: 00 0000 = Farthest left (-32 pixels)
+         ...
+        10 0000 = No horizontal offset
+         ...
+        11 1111 = Farthest right (+31 pixels)*/
 #define VOS 0x03 // Vertical Offset 
+  /*(OSD video can be vertically shifted into the vertical blanking lines)
+   4-0: 0 0000 = Farthest up (+16 pixels)
+         ...
+        1 0000 = No vertical offset
+         ...
+        1 1111 = Farthest down (-15 pixels)*/
 #define DMM 0x04 // Display Memory Mode 
 #define DMAH 0x05 // Display Memory Address High 
 #define DMAL 0x06 // Display Memory Address Low 
@@ -55,3 +66,10 @@
 #define RB14 0x1e // Row 14 Brightness 
 #define RB15 0x1f // Row 15 Brightness 
 #define OSDBL 0x6c // OSD Black Level
+
+//Register name - Read Address
+#define STAT 0x20 // Status 
+#define DMDO 0x30 // Display Memory Data Out 
+#define CMDO 0x40 // Character Memory Data Out
+
+#endif
