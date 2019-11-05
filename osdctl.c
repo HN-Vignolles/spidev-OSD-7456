@@ -7,6 +7,7 @@
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
+#define PATH_MAX 4096
 
 struct spi_ioc_transfer xfer;
 typedef struct{
@@ -49,7 +50,7 @@ int main(int argc, char **argv){
 int spidev_init(void){
   //int ret;
   if((fd = open(initspi.filename,O_RDWR)) < 0){
-    perror("%s",initspi.filename);
+	  perror(initspi.filename);
     return EXIT_FAILURE;
   }
   if((ioctl(fd, SPI_IOC_WR_MODE, &initspi.mode)) < 0){
@@ -87,10 +88,9 @@ void writeAddrData(uint8_t addr, uint8_t data){
   uint8_t buf[2];
   buf[0] = addr;
   buf[1] = data;
-  xfer.tx_buf = buf;
+  xfer.tx_buf = (unsigned long)buf;
   xfer.len = 2;
-  if((ioctl(fd, SPI_IOC_MESSAGE(1), xfer)) < 0){
+  if((ioctl(fd, SPI_IOC_MESSAGE(1), &xfer)) < 0){
     perror("SPI_IOC_MESSAGE");
-    return EXIT_FAILURE;
   }
 }
