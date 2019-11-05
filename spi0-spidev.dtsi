@@ -24,10 +24,10 @@
 	};
 };
 &spi0{
-	dac@0{
+	max7456@0{
 		reg = <0>;
 		compatible = "spidev";
-		spi-max-frequency = <50000000>;
+		spi-max-frequency = <10000000>;
 		spi-cpha;
 	};
 };
