@@ -1,0 +1,33 @@
+#include "subarctic/pinctrl.h"
+#include "bone/pins.h"
+&ocp{
+	P9_22_pinmux { status = "disabled"; };
+	P9_21_pinmux { status = "disabled"; };
+	P9_18_pinmux { status = "disabled"; };
+	P9_17_pinmux { status = "disabled"; };
+};
+&spi0{ spi0channel@0 { status = "disabled"; }; };
+&spi0{
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi0_pins>;
+	ti,spi-num-cs = <1>;
+	status = "okay";
+};
+&am33xx_pinmux{
+	spi0_pins: spi0 {
+		pinctrl-single,pins = <
+ 			PIN_IO_PULLUP( P9_22, 0 )
+			PIN_IN_PULLUP( P9_21, 0 )
+			PIN_OUT_PULLUP( P9_18, 0 )
+			PIN_OUT_PULLUP( P9_17, 0 )
+		>;
+	};
+};
+&spi0{
+	dac@0{
+		reg = <0>;
+		compatible = "spidev";
+		spi-max-frequency = <50000000>;
+		spi-cpha;
+	};
+};
