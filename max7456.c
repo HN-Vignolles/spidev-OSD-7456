@@ -46,6 +46,48 @@ void displayChar(uint8_t y, uint8_t x, uint16_t addr, uint8_t attr){
   writeAddrData(VM0, 0x48); 
 }
 
+void displayString(uint8_t y, uint8_t x, const char *s, uint8_t attr){
+  uint8_t addrH, c; 
+  uint16_t ca, value; //character address
+  c = *s++; 
+  int flag = 0;
+  ca = y * 30 + x; 
+  writeAddrData(OSDBL,0x00);
+  while (c != 0){
+    flag = 0;
+    int i = 0;
+    for(i = 0;i < 34;i++){
+      if (c == tAsciiAddr[i].ascii){
+        value = tAsciiAddr[i].addr;
+        flag = 1;
+      }
+    }
+    if(flag == 0){
+      if ((c >= '0') && (c <='9'))
+        value = ((c == '0')? 10 : c - '1' + 1);
+      else if ((c >= 'A') && (c <= 'Z'))
+        value = (c - 'A' + 11);
+      else if ((c >= 'a') && (c <= 'z'))
+        value = (c - 'a' + 37);
+      else
+        value = (0x00);
+    }
+    
+    addrH = ca >> 8; 
+    writeAddrData(DMM, 0x40); 
+    writeAddrData(DMAH, addrH | 0x2); 
+    writeAddrData(DMAL, ca); 
+    writeAddrData(DMDI, attr);
+    
+    writeAddrData(DMAH, addrH); 
+    writeAddrData(DMAL, ca); 
+    writeAddrData(DMDI, value);
+    c = *s++;
+    k = k+1;
+  }
+  writeAddrData(VM0, 0x48); 
+}
+
 void clearOSD(void){ 
   writeAddrData(DMM, 0x01); 
 }
