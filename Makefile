@@ -2,9 +2,7 @@
 EXEC     = $(shell basename $$(pwd))
 CC       = gcc
 
-CFLAGS   = -std=gnu11 -O3 -Wall -Wextra -Wpedantic -Wstrict-aliasing
-CFLAGS  += $(shell pkg-config --cflags glib-2.0 gio-2.0)
-LDFLAGS  = $(shell pkg-config --libs   glib-2.0 gio-2.0)
+CFLAGS   = -std=gnu11 -O3 -Wall -Wextra
 
 SRC      = $(wildcard *.c)
 OBJ      = $(SRC:.c=.o)
