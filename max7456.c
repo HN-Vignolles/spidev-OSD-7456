@@ -2,8 +2,9 @@
 #include "max7456.h"
 
 extern struct spi_ioc_transfer xfer;
+extern int fd;
 
-void writeAddrData(int fd, uint8_t addr, uint8_t data){
+void writeAddrData(uint8_t addr, uint8_t data){
   uint8_t buf[2];
   buf[0] = addr;
   buf[1] = data;
