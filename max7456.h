@@ -82,6 +82,7 @@ extern int fd;
 void writeAddrData(uint8_t addr, uint8_t data);
 void writeData(uint8_t data);
 void displayChar(uint8_t y, uint8_t x, uint16_t addr, uint8_t attr);
+void displayString(uint8_t y, uint8_t x, const char *s, uint8_t attr);
 void clearOSD(void);
 
 #endif
