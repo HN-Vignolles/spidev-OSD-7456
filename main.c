@@ -21,14 +21,16 @@ int main(int argc, char **argv){
         return EXIT_FAILURE;
     }
   }
-  initspi.mode = SPI_MODE_0;
+  
+	initspi.mode = SPI_MODE_0;
   /*The SPI commands are 16 bits long with the 8 most significant bits (MSBs) representing the register address
     and the 8 least significant bits (LSBs) representing the data*/
   initspi.bits = 8;
   initspi.speed = 5000000;
   spidev_init();
   displayChar(1,1,0xFC,OSD_LBC);
-  displayString(2, 2, "Hello", OSD_LBC);
+  displayString(2, 2, "Hello World!", OSD_LBC);
+  clearOSD();
   close(fd);
 }
 
