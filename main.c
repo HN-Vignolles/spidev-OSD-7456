@@ -7,6 +7,9 @@ spi_t initspi;
 
 int main(int argc, char **argv){
   int c;
+  char buf[MAXLINE], *pEnd;
+  long int x,y,mode;
+
   if(argc < 3){
     fprintf(stderr, "Usage: %s -f </dev/spidev...>", argv[0]);
     return EXIT_FAILURE;
@@ -21,8 +24,7 @@ int main(int argc, char **argv){
         return EXIT_FAILURE;
     }
   }
-  
-	initspi.mode = SPI_MODE_0;
+  initspi.mode = SPI_MODE_0;
   /*The SPI commands are 16 bits long with the 8 most significant bits (MSBs) representing the register address
     and the 8 least significant bits (LSBs) representing the data*/
   initspi.bits = 8;
@@ -30,6 +32,13 @@ int main(int argc, char **argv){
   spidev_init();
   displayChar(1,1,0xFC,OSD_LBC);
   displayString(2, 2, "Hello World!", OSD_LBC);
+  /*while(fgets(buf,MAXLINE,stdin)!=NULL){
+    x = strtol(buf,&pEnd,10);
+    y = strtol(pEnd,&pEnd,10);
+    mode = strtol(pEnd,&pEnd,2);
+    fprintf(stderr,"x:%li, y:%li, mode:%x, text: %s\n",x,y,mode<<5,pEnd);
+    displayString(y,x,pEnd,mode<<5);
+  }*/
   clearOSD();
   close(fd);
 }
